@@ -1,0 +1,18 @@
+import pandas as pd
+
+
+ratings = pd.read_csv('ratings.csv')
+movies = pd.read_csv('movies.csv')
+
+
+five_star_ratings = ratings[ratings['rating'] == 5.0]
+
+merged = pd.merge(five_star_ratings, movies, on='movieId', how='left')
+
+
+count_by_movie = merged.groupby(['movieId', 'title']).size()
+
+
+most_popular = count_by_movie.idxmax()
+
+print(f'Фильм "{most_popular[1]}" с movieId={most_popular[0]} имеет наибольшее количество оценок 5.0: {count_by_movie.loc[most_popular]}')
