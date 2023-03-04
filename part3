@@ -1,0 +1,6 @@
+import pandas as pd
+
+url = 'https://fortrader.org/quotes'
+table = pd.read_html(url, match='Курс доллара')[0]
+table = tables[0]
+table.head()
