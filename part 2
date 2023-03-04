@@ -1,0 +1,12 @@
+import pandas as pd
+
+
+data = pd.read_csv('path/to/power.csv', delimiter=',')
+
+filtered_data = data[(data['country'].isin(['Latvia', 'Lithuania', 'Estonia']))
+                     & (data['category'].isin([4, 12, 21]))
+                     & (data['year'].between(2005, 2010, inclusive=True))
+                     & (data['quantity'] >= 0)]
+
+total_quantity = filtered_data['quantity'].sum()
+print(f'Суммарное потребление: {total_quantity}')
